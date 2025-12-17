@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Terminal/IDE inspired dark theme */
+    --background: 220 13% 9%;
+    --foreground: 140 31% 85%;
+
+    --card: 220 13% 12%;
+    --card-foreground: 140 31% 85%;
+
+    --popover: 220 13% 12%;
+    --popover-foreground: 140 31% 85%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 144 6% 13%;
+
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 144 6% 13%;
+
+    --muted: 220 13% 16%;
+    --muted-foreground: 220 9% 55%;
+
+    --accent: 187 71% 50%;
+    --accent-foreground: 144 6% 13%;
+
+    --destructive: 0 63% 49%;
+    --destructive-foreground: 140 31% 85%;
+
+    --border: 220 13% 18%;
+    --input: 220 13% 16%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.5rem;
+
+    /* Developer-focused gradient tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(187 71% 50%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(0 63% 49%) 100%);
+    --gradient-mesh: radial-gradient(at 0% 0%, hsl(142 76% 20% / 0.15) 0, transparent 50%),
+                     radial-gradient(at 100% 0%, hsl(220 13% 12% / 0.3) 0, transparent 50%),
+                     radial-gradient(at 100% 100%, hsl(142 76% 20% / 0.15) 0, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(187 71% 30% / 0.1) 0, transparent 50%);
+    
+    /* Subtle shadow tokens */
+    --shadow-glow: 0 0 30px hsl(142 76% 36% / 0.2);
+    --shadow-card: 0 8px 32px hsl(220 13% 5% / 0.6);
+    
+    /* Animation tokens */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-lg bg-card/50 border border-border/50;
+  }
+
+  .glow-hover {
+    transition: var(--transition-smooth);
+  }
+
+  .glow-hover:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-4px);
+  }
+
+  .tech-badge {
+    @apply transition-all duration-300 hover:scale-110 hover:bg-primary/20;
+  }
+
+  .code-block {
+    @apply font-mono text-sm bg-muted/30 rounded px-2 py-1 border border-border/30;
+  }
+
+  .terminal-cursor {
+    @apply animate-pulse inline-block w-2 h-5 bg-primary ml-1;
+  }
+
+  .perspective-card {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .perspective-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
